@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { login, checkToken } from '../../utils/auth';
 
-export default function Register({ isOpen, onClose }) {
+export default function Register({ isOpen, onClose, onRegisterSubmit, onLoginClick }) {
 
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        name: ''
+        username: ''
       });
       const [errors, setErrors] = useState({});
       const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,22 +31,35 @@ export default function Register({ isOpen, onClose }) {
             }
           } catch (error) {
             console.error('Error validando el token:', error.message);
-            navigate('/signin');
           }
         }
         
         reviewToken();
       }, [navigate]);
     
+
+
       // Form validation
-      useEffect(() => {
-        const isFormValid = 
-          formData.email?.length > 0 && 
-          formData.password?.length > 0 && 
-          Object.keys(errors).length === 0;
-        
-        setIsValid(isFormValid);
-      }, [formData, errors]);
+      const validateField = (name, value) => {
+        if (!value || value.trim() === '') {
+          return 'Este campo es obligatorio.';
+        }
+        if (value.length < 6 && name !== 'email') {
+          return `El campo ${name} debe tener al menos 6 caracteres.`;
+        }
+  
+        if (value.length > 30) {
+          return `El campo ${name} no puede tener más de 30 caracteres.`;
+        }
+
+        if (name === 'email') {
+          if (!value.includes('@')) {
+            return 'Introduce un correo electrónico válido';
+          }
+        }
+    
+        return '';
+      };
     
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,32 +67,21 @@ export default function Register({ isOpen, onClose }) {
           ...prev,
           [name]: value
         }));
-    
-        // Basic validation
-        let newErrors = { ...errors };
-        if (name === 'email') {
-          if (!value.includes('@')) {
-            newErrors.email = 'Introduce un correo electrónico válido';
-          } else {
-            delete newErrors.email;
-          }
-        }
-        if (name === 'password') {
-          if (value.length < 6) {
-            newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
-          } else {
-            delete newErrors.password;
-          }
-        }
-        setErrors(newErrors);
+        
+        const error = validateField(name, value);
+        setErrors(prev => ({
+          ...prev,
+          [name]: error
+        }));
       };
+     
     
       const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
     
         try {
-          await login(formData.email, formData.password);
+          await login(formData.email, formData.password, formData.username);
           if (setCurrentUser) {
             setCurrentUser({
               email: formData.email,
@@ -90,7 +92,7 @@ export default function Register({ isOpen, onClose }) {
         } catch (err) {
           setErrors(prev => ({
             ...prev,
-            submit: 'Error al iniciar sesión. Por favor, verifica tus credenciales.'
+            submit: 'Error al inscribirse.'
           }));
         } finally {
           setIsSubmitting(false);
@@ -105,11 +107,12 @@ export default function Register({ isOpen, onClose }) {
           onSubmit={handleSubmit}
           name="register-form"
           title="Inscribirse"
-          buttonText={isSubmitting ? "Cargando..." : "Inscribirse"}
-          buttonTextRegister={isSubmitting ? "Cargando..." : " Iniciar Sesión"}
-          isValid={isValid && !isSubmitting}
+          buttonTextSubmit={isSubmitting ? "Cargando..." : "Inscribirse"}
+          buttonTextRegister={" Iniciar Sesión"}
+          isValid={isValid}
+          onLoginClick={onLoginClick}
         >
-          <label className="popup__label">Correo electrónico</label>
+          <p className="popup__label">Correo electrónico</p>
     
           <input 
             id="email-input" 
@@ -121,13 +124,12 @@ export default function Register({ isOpen, onClose }) {
             onChange={handleChange}
             name="email" 
           />
-    
-          <div className="popup__line"></div>
+
           <span className="popup__input-error">
             {errors.email}
           </span>
     
-          <label className="popup__label">Contraseña</label>
+          <p className="popup__label">Contraseña</p>
     
           <input 
             id="password-input" 
@@ -141,27 +143,25 @@ export default function Register({ isOpen, onClose }) {
             minLength="6"
           />
     
-          <div className="popup__line"></div>
           <span className="popup__input-error">
             {errors.password}
           </span>
 
-          <label className="popup__label">Nombre de usuario</label>
+          <p className="popup__label">Nombre de usuario</p>
     
           <input 
-            id="name-input" 
-            className={`popup__input  ${errors.email ? 'popup__input-error' : ''}`}
+            id="username-input" 
+            className={`popup__input  ${errors.username ? 'popup__input-error' : ''}`}
             type="text" 
             placeholder="Introduce tu nombre de usuario"
             required 
             value={formData.name}
             onChange={handleChange}
-            name="name" 
+            name="username" 
           />
-    
-          <div className="popup__line"></div>
+
           <span className="popup__input-error">
-            {errors.name}
+            {errors.username}
           </span>
     
           {errors.submit && (

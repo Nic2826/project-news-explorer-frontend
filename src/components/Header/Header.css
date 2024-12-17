@@ -18,10 +18,19 @@
 .header__container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 35px;
+    gap: 25px;
     align-items: center;
+    margin: 0;
 }
+
+.header__text-hidden{
+    visibility: hidden;
+    font-size: 0;
+    font-weight: 0;
+    line-height: 0;
+    width: 0;
+    margin: 0;
+    }
 
 .header__text {
     font-family: "Roboto";
@@ -29,6 +38,8 @@
     font-weight: 500;
     line-height: 24px;
     position: relative;
+    width: auto;
+    visibility: visible;
 }
 
 .header__text-button {
@@ -50,10 +61,16 @@
     color: white;
 }
 
+.header__outicon-hidden{
+visibility: hidden;
+width: 0;
+}
+
 .header__outicon {
     width: 17px;
     height: 16px;
     margin-left: 10px;
+    visibility: visible;
 }
 
 @media (hover: hover) {
@@ -66,12 +83,18 @@
 .header__text:hover::after {
     content: '';
     position: absolute;
-    left: 0;
+    left: -10px;
     bottom: -20px;  /* Esto controla la distancia */
-    width: 100%;
     height: 2px;
-    background-color: white;
-    
+    background-color: white;   
+}
+
+.header__text-inicio:hover::after {
+    width: 140%; 
+}
+
+.header__text-saved:hover::after {
+    width: 112%; 
 }
 
 .header__text-button:hover {

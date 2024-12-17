@@ -1,20 +1,115 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { login, checkToken } from '../../utils/auth';
 import PopUpWithForm from '../PopUpWithForm/PopUpWithForm';
 
-export default function Login({ isOpen, onClose }) {
+export default function Login({ isOpen, onClose,  onLoginSubmit, onRegisterClick}) {
+  const inputRef = useRef();
+  const currentUser = useContext(CurrentUserContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+
+
+  
+
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  // const [isValid, setIsValid] = useState(false);
   
   const { setCurrentUser } = useContext(CurrentUserContext) || {};
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (isOpen && currentUser?.email && currentUser?.password) {
+      setFormData({
+        name: currentUser.email,
+        about: currentUser.password
+      });
+      setErrors({});
+    }
+  }, [isOpen, currentUser]);
+
+
+
+  const validateField = (name, value) => {
+    if (!value || value.trim() === '') {
+      return 'Este campo es obligatorio.';
+    }
+    if (value.length < 6 && name !== 'email') {
+      return `El campo ${name} debe tener al menos 6 caracteres.`;
+    }
+    if (value.length > 30) {
+      return `El campo ${name} no puede tener más de 30 caracteres.`;
+    }
+
+    if (name === 'email') {
+      if (!value.includes('@')) {
+        return 'Introduce un correo electrónico válido';
+      }
+    }
+
+    return '';
+  };
+
+
+const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    const error = validateField(name, value);
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }));
+  };
+
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validate all fields
+    const newErrors = {
+      email: validateField('name', formData.email),
+      password: validateField('about', formData.password)
+    };
+    
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    if (Object.values(newErrors).some(error => error)) {
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await onLoginSubmit(formData);
+      onClose();
+    } catch (error) {
+      setErrors(prev => ({
+        ...prev,
+        submit: 'Error al iniciar sesión. Por favor, verifica tus credenciales.'
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const isValid = !Object.values(errors).some(error => error) && 
+                 formData.email.length >= 2 && 
+                 formData.password.length >= 2;
+
+
+
+// hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
 
   // Token validation on mount
   useEffect(() => {
@@ -29,71 +124,14 @@ export default function Login({ isOpen, onClose }) {
         }
       } catch (error) {
         console.error('Error validando el token:', error.message);
-        navigate('/signin');
+        navigate('/main');
       }
     }
     
     reviewToken();
   }, [navigate]);
 
-  // Form validation
-  useEffect(() => {
-    const isFormValid = 
-      formData.email?.length > 0 && 
-      formData.password?.length > 0 && 
-      Object.keys(errors).length === 0;
-    
-    setIsValid(isFormValid);
-  }, [formData, errors]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    // Basic validation
-    let newErrors = { ...errors };
-    if (name === 'email') {
-      if (!value.includes('@')) {
-        newErrors.email = 'Introduce un correo electrónico válido';
-      } else {
-        delete newErrors.email;
-      }
-    }
-    if (name === 'password') {
-      if (value.length < 6) {
-        newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
-      } else {
-        delete newErrors.password;
-      }
-    }
-    setErrors(newErrors);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await login(formData.email, formData.password);
-      if (setCurrentUser) {
-        setCurrentUser({
-          email: formData.email,
-          isLoggedIn: true
-        });
-      }
-      navigate('/');
-    } catch (err) {
-      setErrors(prev => ({
-        ...prev,
-        submit: 'Error al iniciar sesión. Por favor, verifica tus credenciales.'
-      }));
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     
@@ -103,12 +141,13 @@ export default function Login({ isOpen, onClose }) {
       onSubmit={handleSubmit}
       name="login-form"
       title="Iniciar Sesión"
-      buttonText={isSubmitting ? "Cargando..." : "Iniciar Sesión"}
-      buttonTextRegister={isSubmitting ? "Cargando..." : " inscribirse"}
-      isValid={isValid && !isSubmitting}
+      buttonTextSubmit={isSubmitting ? "Cargando..." : "Iniciar Sesión"}
+      buttonTextRegister={" inscribirse"}
+      isValid={isValid}
+      onRegisterClick={onRegisterClick}
     >
 
-      <label className="popup__label">Correo electrónico</label>
+      <p className="popup__label">Correo electrónico</p>
 
       <input 
         id="email-input" 
@@ -126,7 +165,7 @@ export default function Login({ isOpen, onClose }) {
         {errors.email}
       </span>
 
-      <label className="popup__label">Contraseña</label>
+      <p className="popup__label">Contraseña</p>
 
       <input 
         id="password-input" 
@@ -150,6 +189,8 @@ export default function Login({ isOpen, onClose }) {
           {errors.submit}
         </span>
       )}
+
+      
     </PopUpWithForm>
   );
 }

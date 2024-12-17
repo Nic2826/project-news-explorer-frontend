@@ -10,7 +10,7 @@
     background-color: white;
 }
 
-.card__text-container{
+.card__text-container {
     display: grid;
     grid-template-rows: repeat(4, auto);
     gap: 12px;
@@ -74,46 +74,85 @@
     justify-content: center;
 }
 
-.card__button-save{
+.card__button-save {
     opacity: 30%;
     width: 14px;
     height: 19px;
 }
 
-.card__button-delete{
+.card__button-delete {
     opacity: 30%;
     width: 18px;
     height: 19px;
 }
 
-.card__topic-container{
-  height: 40px;
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  position: absolute;
+.card__topic-container {
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    position: absolute;
     top: 24px;
     left: 24px;
 }
 
-.card__topic-text{
+.card__topic-text {
     font-family: 'Roboto';
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
-    color:black;
+    color: black;
     margin: auto;
     padding: 0 14px;
 }
+
+.card__tooltip-container {
+    height: 40px;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    display: flex;
+    position: absolute;
+        top: 24px;
+        right: 69px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.card__tooltip {
+    font-family: Roboto;
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    text-align: center;
+    padding: 0 10px;
+    margin: auto;
+}
+
+
 
 @media (hover: hover) {
     .card__button-save:hover {
         cursor: pointer;
         opacity: 100%;
+
     }
 
     .card__button-delete:hover {
         cursor: pointer;
         opacity: 100%;
+    }
+
+    .card__button-container:hover{
+        cursor: pointer;
+    }
+
+    .card__button-container:hover~.card__tooltip-container {
+        opacity: 1;
+    }
+
+    .card__button-container:hover~.card__tooltip-container .card__tooltip {
+        opacity: 1;
     }
 }
