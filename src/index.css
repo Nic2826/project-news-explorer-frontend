@@ -16,7 +16,7 @@ code {
 @import url(./vendor/fonts/fonts.css);
 @import url(./components/Header/Header.css);
 @import url(./blocks/body.css);
-@import url(./components/App/App.css);
+@import url(./components/AppContent/AppContent.css);
 @import url(./components/Footer/Footer.css);
 @import url(./components/Main/Main.css);
 @import url(./components/About/About.css);

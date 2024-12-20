@@ -1,47 +1,33 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useState } from 'react';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import PopUpInfo from '../PopUpInfo/PopUpInfo';
+import NewsCardList from '../NewsCardList/NewsCardList';
+// import PopUpInfo from '../PopUpInfo/PopUpInfo';
 
-export default function Main({ onSearchError, handleSearchSubmit, load, onSearchResults }) {
-  const [isLogged, setIsLogged] = useState(false);
-  const [name, setName] = useState('Iniciar sesión');
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
-  const [currentKeyword, setCurrentKeyword] = useState('');
-  
-  const navigate = useNavigate();
+export default function Main({ onSearch, 
+  isLoading, 
+  searchError,  
+  isLogged, 
+  isRouteSavedArticles,
+  handleLoginClick,
+  name,
+  isLoginOpen,
+  isRegisterOpen,
+  onClosePopups,
+  onSubmitLogin,
+  onRegisterClick,
+  onSaveArticle,
+  articles,
+  onDeleteArticle,
+  onUpdateArticles,
+  searchKeyword }) {
 
-  const handleSearch = (articles, keyword) => {
-    setCurrentKeyword(keyword);
-    onSearchResults(articles, keyword); // Pasa tanto los artículos como el keyword
-  };
+    
 
-  function handleLoginClick() {
-    setIsLoginOpen(true);
-    setIsRegisterOpen(false);
-  }
-
-  function CloseAllPopUps() {
-    setIsLoginOpen(false);
-    setIsRegisterOpen(false);
-  }
-
-  function handleSubmitLogin(e) {
-    e.preventDefault();
-    setIsLoginOpen(false);
-    setIsLogged(true);
-    navigate('/');
-  }
-
-  function handleRegisterClick() {
-    setIsRegisterOpen(true);
-    setIsLoginOpen(false);
-  }
+  // const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
+ 
 
   return (
     <div className="main">
@@ -49,6 +35,7 @@ export default function Main({ onSearchError, handleSearchSubmit, load, onSearch
         isLogged={isLogged}
         handleLogin={handleLoginClick}
         name={name}
+        isRouteSavedArticles={isRouteSavedArticles} 
       />
 
       <div className='main__content'>
@@ -58,31 +45,32 @@ export default function Main({ onSearchError, handleSearchSubmit, load, onSearch
         </p>
       </div>
 
-      <SearchForm 
-        onSearchResults={handleSearch}
-        onError={onSearchError}
-        onSubmit={handleSearchSubmit}
-        load={load}
+      <SearchForm
+        onSearch={onSearch}
+        isLoading={isLoading}
+        searchError={searchError}
+        isLogged={isLogged}
       />
 
-      {isLoginOpen && 
-        <Login 
-          onClose={CloseAllPopUps}
-          isOpen={isLoginOpen}
-          onLoginSubmit={handleSubmitLogin}
-          onRegisterClick={handleRegisterClick}
+      {isLoginOpen &&
+        <Login
+        onClose={onClosePopups}
+        isOpen={isLoginOpen}
+        onLoginSubmit={onSubmitLogin}
+        onRegisterClick={onRegisterClick}
         />
       }
 
-      {isRegisterOpen && 
-        <Register 
-          onClose={CloseAllPopUps}
-          isOpen={isRegisterOpen}
-          onLoginClick={handleLoginClick}
+      {isRegisterOpen &&
+        <Register
+        onClose={onClosePopups}
+        isOpen={isRegisterOpen}
+        onLoginClick={handleLoginClick}
         />
       }
 
-      {isInfoPopUpOpen && <PopUpInfo />}
+      {/* {isInfoPopUpOpen && <PopUpInfo />} */}
+
     </div>
   );
 }

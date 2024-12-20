@@ -1,50 +1,47 @@
 import NewsCard from '../NewsCard/NewsCard';
-import NotFound from '../NotFound/NotFound';
 import { useState } from 'react';
-import api from '../../utils/Api';
+import { useLocation } from 'react-router-dom';
+import NotFound from '../NotFound/NotFound';
 
-export default function NewsCardList({ 
-    articles, 
-    isLoggedUser = false, 
+export default function NewsCardList({
+    articles,
+    isLogged,
     onDeleteArticle,
-    keyword,
-    onUpdateArticles    
-}) 
-
-{
+    onSaveArticle,
+    keyword = '',
+    onUpdateArticles,
+    savedArticles
+}) {
     const [currentPageSize, setCurrentPageSize] = useState(3);
-    const showMoreButton = !isLoggedUser && articles.length < 12;
+    const showMoreButton = articles.length < 12;
+    const location = useLocation();
+    const isRouteSavedArticles = location.pathname === '/saved-news';
 
-    
 
     const handleSeeMoreClick = async () => {
+
+        console.log(isLogged);
         try {
-            // No permitas más de 12 artículos
             if (currentPageSize >= 12) {
                 return;
             }
-            
+
             const newPageSize = currentPageSize + 3;
             setCurrentPageSize(newPageSize);
-            
-            // Realiza la nueva búsqueda con el pageSize actualizado
-            const newArticles = await api.fetchNews(keyword, newPageSize);
-            // Aquí necesitarás una función para actualizar los artículos en el componente padre
-            onUpdateArticles(newArticles);
-            
+
+            onUpdateArticles(keyword, newPageSize);
         } catch (error) {
             console.log(error);
         }
     };
 
-
     // Si no hay artículos, mostrar mensaje
     if (!articles || articles.length === 0) {
         return (
             <div className="no-articles">
-                {isLoggedUser 
-                    ? "No tienes artículos guardados" 
-                    : <NotFound />
+                {isRouteSavedArticles
+                    ? <NotFound />
+                    : null
                 }
             </div>
         );
@@ -52,27 +49,45 @@ export default function NewsCardList({
 
     return (
         <div className='newsCardList'>
-            <p className="newsCardList__title">{isLoggedUser ? "nada" : "Resultados de la búsqueda"}</p>
+            <p className="newsCardList__title">
+
+                {isLogged
+                    ? (isRouteSavedArticles
+                        ? ''
+                        : 'Resultados de la búsqueda')
+                    : 'Resultados de la búsqueda'
+                }
+
+            </p>
             <div className="newsCardList__card-container">
-            {articles.map((article) => (
-                <NewsCard 
-                    key={article.id} 
-                    article={article} 
-                    isLogged={isLoggedUser}
-                    onDelete={onDeleteArticle}
-                    keyword={keyword} 
-                />
-            ))}
+                {articles.map((article) => (
+                    <NewsCard
+                        key={article.id}
+                        article={article}
+                        isLogged={isLogged}
+                        onDelete={onDeleteArticle}
+                        onSave={onSaveArticle}
+                        keyword={article.searchKeyword || keyword}
+                        isRouteSavedArticles={isRouteSavedArticles}
+                        savedArticles={savedArticles}
+                    />
+                ))}
             </div>
-            {showMoreButton && (
-                <button 
-                className={isLoggedUser ? "newsCardList__button-hidden" : "newsCardList__button"} 
-                    onClick={handleSeeMoreClick} 
-                    type='button'
-                >
-                    Ver más
-                </button>
-            )}
+
+            <button
+                className=
+                {showMoreButton ?
+                    (isRouteSavedArticles
+                        ?"newsCardList__button-hidden"
+                        : "newsCardList__button"
+                    )
+                    : "newsCardList__button" }
+                onClick={handleSeeMoreClick}
+                type='button'
+            >
+                Ver más
+            </button>
+
         </div>
     )
 }

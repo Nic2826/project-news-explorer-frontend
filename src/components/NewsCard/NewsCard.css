@@ -75,10 +75,10 @@
 }
 
 .card__button-save {
-    opacity: 30%;
     width: 14px;
     height: 19px;
 }
+
 
 .card__button-delete {
     opacity: 30%;
@@ -135,8 +135,6 @@
 @media (hover: hover) {
     .card__button-save:hover {
         cursor: pointer;
-        opacity: 100%;
-
     }
 
     .card__button-delete:hover {

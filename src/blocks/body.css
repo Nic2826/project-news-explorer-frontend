@@ -7,9 +7,12 @@
     background-color: white;
     max-width: 1440px;
     min-width: 320px;
-    /* min-height: 100vh; */
+    min-height: 100vh;
     box-sizing: border-box;
     margin: auto ;
     color: black;
     padding: 0 0 40px;
+    display: flex;
+    flex-direction: column;
+    
   }

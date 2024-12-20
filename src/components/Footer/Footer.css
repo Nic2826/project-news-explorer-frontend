@@ -1,6 +1,15 @@
 .footer{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; */
+
+
+    margin-top: auto;
+    padding: 20px 104px;
+    background-color: #fff;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -11,12 +20,14 @@
     font-weight: 400;
     line-height: 22px;
     color: #B6BCBF;
+    margin: 0;
 }
 
 .footer__links{
     display: flex;
     flex-direction: row;
     gap: 30px;
+
 }
 
 .footer__link{

@@ -6,6 +6,7 @@
     color: white;
     padding-top: 20px;
     z-index: 3;
+    margin: 0;
 }
 
 .header__logo {
@@ -21,16 +22,34 @@
     gap: 25px;
     align-items: center;
     margin: 0;
+    background-color: transparent;
+    border: none;
 }
 
-.header__text-hidden{
+.header__text-hidden {
     visibility: hidden;
     font-size: 0;
     font-weight: 0;
     line-height: 0;
     width: 0;
     margin: 0;
-    }
+    background-color: transparent;
+    border: none;
+    color: white;
+    
+}
+
+.header__text-hidden-black {
+    visibility: hidden;
+    font-size: 0;
+    font-weight: 0;
+    line-height: 0;
+    width: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    color: black;
+}
 
 .header__text {
     font-family: "Roboto";
@@ -40,6 +59,10 @@
     position: relative;
     width: auto;
     visibility: visible;
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin: 0;
 }
 
 .header__text-button {
@@ -61,9 +84,9 @@
     color: white;
 }
 
-.header__outicon-hidden{
-visibility: hidden;
-width: 0;
+.header__outicon-hidden {
+    visibility: hidden;
+    width: 0;
 }
 
 .header__outicon {
@@ -73,6 +96,80 @@ width: 0;
     visibility: visible;
 }
 
+
+
+/* -----------------------------Black letter ----------------------*/
+
+.header-black {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    color: black;
+    padding-top: 20px;
+    z-index: 3;
+}
+
+.header__logo-black {
+    color: black;
+    font-family: "Roboto slab";
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.header__text-black {
+    color: black;
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    position: relative;
+    width: auto;
+    visibility: visible;
+}
+
+.header__text-button-black {
+    font-family: "Roboto";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    position: relative;
+    border: 1px solid;
+    border-radius: 100px;
+    background-color: transparent;
+    width: auto;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 20px;
+    color: black;
+}
+
+
+.header__text-inicio-active::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    bottom: -20px;
+    height: 2px;
+    width: 140%;
+    background-color: white;
+}
+
+.header__text-saved-active::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    bottom: -20px;
+    height: 2px;
+    width: 112%;
+    background-color: black;
+}
+
+
 @media (hover: hover) {
     .header__text:hover {
         cursor: pointer;
@@ -80,33 +177,57 @@ width: 0;
         transform: scale(1.03);
     }
 
-.header__text:hover::after {
-    content: '';
-    position: absolute;
-    left: -10px;
-    bottom: -20px;  /* Esto controla la distancia */
-    height: 2px;
-    background-color: white;   
-}
+    .header__text:hover::after {
+        content: '';
+        position: absolute;
+        left: -10px;
+        bottom: -20px;
+        /* Esto controla la distancia */
+        height: 2px;
+        background-color: white;
+    }
 
-.header__text-inicio:hover::after {
-    width: 140%; 
-}
+    .header__text-inicio:hover::after {
+        width: 140%;
+    }
 
-.header__text-saved:hover::after {
-    width: 112%; 
-}
+    .header__text-saved:hover::after {
+        width: 112%;
+    }
 
-.header__text-button:hover {
-    cursor: pointer;
-    opacity: 80%;
-    transform: scale(1.03);
-}
+    .header__text-button:hover {
+        cursor: pointer;
+        opacity: 80%;
+        transform: scale(1.03);
+    }
 
-.header__text-button:active{
-    /* color: white; */
-    border-color:  #2A65CC;
-    /* background-color: white; */
- }
- 
+    .header__text-button:active {
+        /* color: white; */
+        border-color: #2A65CC;
+        /* background-color: white; */
+    }
+
+    
+    .header__text-button-black:hover {
+        cursor: pointer;
+        opacity: 80%;
+        transform: scale(1.03);
+    }
+
+    .header__text-black:hover{
+        cursor: pointer;
+        position: relative;
+        transform: scale(1.03);
+    }
+
+    .header__text-inicio-black:hover::after {
+        width: 140%;
+        background-color: black;
+    }
+
+    .header__text-saved-black:hover::after {
+        width: 112%;
+        background-color: black;
+    }
+
 }
