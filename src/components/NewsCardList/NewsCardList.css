@@ -10,6 +10,7 @@
     font-weight: 400;
     line-height: 46px;
     color: #1A1B22;
+    margin-bottom: 64px;
 }
 
 .newsCardList__card-container{
@@ -45,4 +46,27 @@
 .newsCardList__button:hover{
     cursor: pointer;
     background-color: #E8E8E8;
+}
+
+
+@media screen and (max-width: 320px) {
+
+    .newsCardList{
+        background-color: #F5F6F7;
+        padding: 24px 16px;
+        margin: 0 auto;
+    }
+
+    .newsCardList__title{
+        font-size: 30px;
+        line-height: 34px;
+        margin-bottom: 24px;
+    }
+
+    .newsCardList__card-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin: 0 auto;
+    }
 }

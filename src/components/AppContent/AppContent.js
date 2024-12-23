@@ -1,4 +1,4 @@
-import {  Routes, Route, useNavigate } from 'react-router-dom';
+import {  Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './AppContent.css';
 import Main from '../Main/Main';
@@ -178,8 +178,8 @@ const handleRegisterClick = () => {
       <div className="page__container">
         <RouteHandler onRouteChange={handleRouteChange} />
           <Routes>
-            <Route
-            
+            <Route path = "/" element={<Navigate replace to="/main"/>}></Route>
+            <Route 
               path="/main"
               element={
                 <>

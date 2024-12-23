@@ -44,9 +44,12 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
         e.stopPropagation();
 
         if (isLogged && typeof onSave === 'function') {
+            console.log('esta loggeado?', isLogged);
+            console.log('esta en la ruta de saved?', isRouteSavedArticles);
             const articleToSave = {
                 ...article,
                 keyword: keyword
+                
             };
             setIsSaved(true);
             onSave(articleToSave);
@@ -78,9 +81,13 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
                 <p className="card__description">{truncateDescription(article.description)}</p>
                 <p className="card__source">{article.source.name}</p>
             </div>
-            <div className="card__topic-container">
+            <div className={isLogged
+                        ? (isRouteSavedArticles
+                            ? "card__topic-container"
+                            :  "card__topic-container-hidden")
+                        : "card__topic-container-hidden"}>
                 <p
-                    className={isLogged && isRouteSavedArticles ? "card__topic-text" : "card__topic-text-hidden"}>
+                    className="card__topic-text">
                     {article.searchKeyword || keyword}
                 </p>
             </div>

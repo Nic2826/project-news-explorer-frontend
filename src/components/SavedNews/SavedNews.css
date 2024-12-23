@@ -3,4 +3,16 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    padding: 0 104px;
+}
+
+@media screen and (max-width: 320px) {
+    .saved-news-container {
+        margin: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        padding: 0 15px;
+    }
+    
 }

@@ -12,19 +12,23 @@
     position: relative;
     border-radius: 50%;
     border: 1px solid black;
-    width: 400px;
-    height: 400px;
-    background: url('https://s3-alpha-sig.figma.com/img/dac0/778e/82f1206f112335e2ee4d938ba64f02d6?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NNcP08d9u1F-CjuvQ9B9dnWkcZGJC5KlpOjqEACAiquVzPWcz-yIENzLhu1Mw6hR~FMKjbeSU6CyJFGcQnOYZpb6GuVMDTLWBITuS-7XsFG41n-zzC35k3OSxabO2P86yVcDpUk0TJJBCOBaH4Suq8STITDr2L29B-rvwuTRp8z3JLsq6DHPyZ9B7gE6~wnFhryoTN2wd0XoaUNxCIGSbEkKP6MojeNWXwcQ2dTa-dMn0~6ieBU0wHHoeSMoRo~kNdzb2esPM52uTW4XTVVrYjjWXoCqrhtQxqKMXxPKZarW4cjPN688slLdQ8F4kihg9k5fmRIGrUoO~6H~7WmMkQ__');
+    width: 100%; 
+    height: 400px; 
+    max-width: 400px;
+    max-height: 400px; 
+    background: url('/src/images/foto.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    margin-right: 32px;
+    aspect-ratio: 1;
 }
 
 .about__text-container {
     width: 600px;
-    height: 120px;
     margin-left: 56px;
     margin-top: 51px;
+    margin: 0;
 }
 
 .about__title {
@@ -32,6 +36,7 @@
     font-size: 40px;
     font-weight: 400;
     line-height: 46px;
+    margin-top: 51px;
 }
 
 .about__description {
@@ -39,4 +44,71 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
+    margin: 0;
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+
+    .about__container {
+        margin-top: 40px;
+        margin-bottom: 0;
+        padding: 0 40px 61px;
+    }
+
+    .about__image{
+        width: 232px;
+        height: 232px;
+        margin-top: 21px;
+    }
+
+    .about__title {
+        font-size: 30px;
+        line-height: 40px;
+        margin-top: 0;
+    }
+
+    .about__text-container {
+        margin-left: 56px;
+        margin-top: 51px;
+        margin: 0;
+    }
+    
+    .about__description {
+        margin: 0;
+        height: 250px;
+        overflow: scroll;
+    }
+}
+
+/* Celular */
+@media screen and (max-width: 320px) {
+
+    .about__container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 32px;
+        margin-bottom: 0;
+        padding: 0 40px 61px;
+    }
+
+    .about__image{
+        width: 272px;
+        height: 272px;
+        margin: 21px auto 24px;
+        
+    }
+
+    .about__text-container {
+        margin-left: 56px;
+        margin-top: 51px;
+        margin: 0;
+        width: 288px;
+    }
+    
+    .about__description {
+        margin: 0;
+        height: 250px;
+        overflow: scroll;
+    }
 }

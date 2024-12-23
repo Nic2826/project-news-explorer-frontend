@@ -1,36 +1,36 @@
 .card__container {
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
     width: 400px;
     height: 576px;
-    border: none;
-    text-align: left;
-    position: relative;
     background-color: white;
-}
-
-.card__text-container {
-    display: grid;
-    grid-template-rows: repeat(4, auto);
-    gap: 12px;
-    margin: 20px 24px 24px 24px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
 .card__image {
     height: 272px;
+    width: 100%;
+    object-fit: cover;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    margin: 0;
+}
+
+.card__text-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px 24px 24px;
+    gap: 12px;
+    text-align: left;
 }
 
 .card__date {
     font-family: 'Source Sans Pro';
     font-size: 18px;
     font-weight: 400;
-    line-height: 24px;
     color: #B6BCBF;
-    /* margin: 8px 0 24px; */
     margin: 0;
 }
 
@@ -40,24 +40,55 @@
     font-weight: 400;
     line-height: 30px;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
 }
 
 .card__description {
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 16px;
-    font-weight: 400;
     line-height: 22px;
-    /* margin: 38px 0 18px; */
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card__source {
     font-family: 'Roboto Slab';
     font-size: 16px;
     font-weight: 700;
-    line-height: 20px;
     color: #B6BCBF;
     margin: 0;
+}
+
+.card__topic-container {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 8px 14px;
+}
+
+.card__topic-text {
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    margin: 0;
+}
+
+.card__topic-container-hidden {
+    display: none;
+    line-height: 0;
+    width: 0;
+    height: 0;
 }
 
 .card__button-container {
@@ -66,91 +97,117 @@
     right: 24px;
     width: 40px;
     height: 40px;
+    background-color: white;
     border-radius: 8px;
-    background-color: #FFFFFF;
-    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.card__button-container:hover {
+    background-color: #f5f5f5;
 }
 
 .card__button-save {
     width: 14px;
     height: 19px;
+    transition: transform 0.2s ease;
 }
 
+.card__button-save:hover {
+    transform: scale(1.1);
+}
 
 .card__button-delete {
-    opacity: 30%;
     width: 18px;
     height: 19px;
+    opacity: 0.3;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.card__topic-container {
-    height: 40px;
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-    position: absolute;
-    top: 24px;
-    left: 24px;
-}
-
-.card__topic-text {
-    font-family: 'Roboto';
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 24px;
-    color: black;
-    margin: auto;
-    padding: 0 14px;
+.card__button-delete:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .card__tooltip-container {
-    height: 40px;
+    position: absolute;
+    top: 24px;
+    right: 69px;
     background-color: white;
     border-radius: 10px;
-    color: black;
-    display: flex;
-    position: absolute;
-        top: 24px;
-        right: 69px;
+    padding: 8px 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    z-index: 1;
 }
 
 .card__tooltip {
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 10px;
     font-weight: 500;
-    display: flex;
-    text-align: center;
-    padding: 0 10px;
-    margin: auto;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.card__button-container:hover ~ .card__tooltip-container {
+    opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .card__container {
+        width: 224px;
+        height: 420px;
+    }
+
+    .card__image {
+        height: 150px;
+    }
+
+    .card__text-container {
+        padding: 16px;
+        gap: 8px;
+    }
+
+    .card__title {
+        font-size: 22px;
+        line-height: 24px;
+        -webkit-line-clamp: 5;
+        
+    }
+
+    .card__description {
+        -webkit-line-clamp: 3;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .card__container {
+        width: 288px;
+        height: 440px;
+    }
+
+    .card__image {
+        height: 196px;
+    }
+
+    .card__text-container {
+        padding: 16px;
+        gap: 8px;
+    }
+
+    .card__description {
+        -webkit-line-clamp: 3;
+        font-size: 16px;
+        line-height: 22px;
+    }
 }
 
 
 
-@media (hover: hover) {
-    .card__button-save:hover {
-        cursor: pointer;
-    }
 
-    .card__button-delete:hover {
-        cursor: pointer;
-        opacity: 100%;
-    }
-
-    .card__button-container:hover{
-        cursor: pointer;
-    }
-
-    .card__button-container:hover~.card__tooltip-container {
-        opacity: 1;
-    }
-
-    .card__button-container:hover~.card__tooltip-container .card__tooltip {
-        opacity: 1;
-    }
-}
