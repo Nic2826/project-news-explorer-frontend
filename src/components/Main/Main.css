@@ -1,12 +1,11 @@
 .main{
     display: block;
-    height: 576px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url('https://s3-alpha-sig.figma.com/img/dac0/778e/82f1206f112335e2ee4d938ba64f02d6?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NNcP08d9u1F-CjuvQ9B9dnWkcZGJC5KlpOjqEACAiquVzPWcz-yIENzLhu1Mw6hR~FMKjbeSU6CyJFGcQnOYZpb6GuVMDTLWBITuS-7XsFG41n-zzC35k3OSxabO2P86yVcDpUk0TJJBCOBaH4Suq8STITDr2L29B-rvwuTRp8z3JLsq6DHPyZ9B7gE6~wnFhryoTN2wd0XoaUNxCIGSbEkKP6MojeNWXwcQ2dTa-dMn0~6ieBU0wHHoeSMoRo~kNdzb2esPM52uTW4XTVVrYjjWXoCqrhtQxqKMXxPKZarW4cjPN688slLdQ8F4kihg9k5fmRIGrUoO~6H~7WmMkQ__');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     margin: 0;
-    padding: 0 104px;
+    /* padding: 0 104px; */
     text-align: center
 }
 
@@ -29,4 +28,55 @@
     font-weight: 400;
     line-height: 24px;
     color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .main{
+        padding: 0 40px;
+        /* height: 400px; */
+    }
+
+    .main__content{
+        max-width: 385px;
+        margin: 38px auto 48px;
+    }
+
+    .main__title{
+        font-size: 36px;
+        line-height: 40px;
+    }
+    
+}
+
+@media screen and (max-width: 550px) {
+    .main{
+        padding: 0 40px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main{
+        padding: 0 16px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .main{
+        padding: 0 16px;
+    }
+
+    .main__content{
+        max-width: 285px;
+        margin: 30px auto 60px;
+    }
+
+    .main__title{
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .main__text{
+        font-size: 20px;
+    }
+    
 }

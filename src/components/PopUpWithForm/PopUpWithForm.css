@@ -18,7 +18,7 @@
   
   .popup__content {
     position: fixed;
-    top: 200px;
+    top: 150px;
     height: 380px;
     width: 430px;
     background-color: white;
@@ -221,13 +221,16 @@
   
   @media screen and (max-width: 640px) {
     .popup__content {
-      height: 322px;
-      width: 282px;
+      height: 400px;
+      width: 290px;
       position: fixed;
       top: 168px;
       left: calc((100vw - 282px) / 2);
     }
   
+    .popup__content-register-form{
+      height: 460px;
+    }
   
     .popup__content-confirm {
       height: 181px;
@@ -288,4 +291,18 @@
       left: 243px;
       cursor: pointer;
     }
+  }
+
+  @media screen and (max-width: 320px) {
+    .popup__content {
+      height: 560px;
+      width: 320px;
+      position: fixed;
+      top: 90px;
+      left: 0;
+    }
+  
+    /* .popup__content-register-form{
+      height: 460px;
+    } */
   }

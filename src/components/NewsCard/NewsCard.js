@@ -7,8 +7,8 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
 
     const [isSaved, setIsSaved] = useState(false);
 
-     // Verificar si el artículo ya está guardado
-     useEffect(() => {
+    // Verificar si el artículo ya está guardado
+    useEffect(() => {
         const isArticleSaved = savedArticles?.some(
             savedArticle => savedArticle.url === article.url
         );
@@ -49,7 +49,7 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
             const articleToSave = {
                 ...article,
                 keyword: keyword
-                
+
             };
             setIsSaved(true);
             onSave(articleToSave);
@@ -68,6 +68,8 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
         }
     };
 
+
+
     return (
         <div className="card__container">
             <img
@@ -82,10 +84,10 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
                 <p className="card__source">{article.source.name}</p>
             </div>
             <div className={isLogged
-                        ? (isRouteSavedArticles
-                            ? "card__topic-container"
-                            :  "card__topic-container-hidden")
-                        : "card__topic-container-hidden"}>
+                ? (isRouteSavedArticles
+                    ? "card__topic-container"
+                    : "card__topic-container-hidden")
+                : "card__topic-container-hidden"}>
                 <p
                     className="card__topic-text">
                     {article.searchKeyword || keyword}
@@ -103,14 +105,19 @@ export default function NewsCard({ article, onSave, onDelete, isLogged, keyword,
                 ) : (
                     <img
                         className="card__button-save"
-                        src={isSaved ? saveIconBlue : saveIcon}
+                        src={isLogged ?
+                            (isSaved
+                                ? saveIconBlue
+                                : saveIcon)
+                                : saveIcon
+                            }
                         alt="icono de guardar"
                         onClick={handleSave}
                     />
                 )}
             </div>
             <div className="card__tooltip-container">
-            <p className="card__tooltip">
+                <p className="card__tooltip">
                     {isLogged
                         ? (isRouteSavedArticles
                             ? 'Eliminar artículo de guardados'

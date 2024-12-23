@@ -1,3 +1,4 @@
+
 import NewsCard from '../NewsCard/NewsCard';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -13,10 +14,10 @@ export default function NewsCardList({
     savedArticles
 }) {
     const [currentPageSize, setCurrentPageSize] = useState(3);
-    const showMoreButton = articles.length < 12;
     const location = useLocation();
     const isRouteSavedArticles = location.pathname === '/saved-news';
 
+    
 
     const handleSeeMoreClick = async () => {
 
@@ -49,7 +50,12 @@ export default function NewsCardList({
 
     return (
         <div className='newsCardList'>
-            <p className="newsCardList__title">
+            <p className={isLogged
+                    ? (isRouteSavedArticles
+                        ? "newsCardList__title-hidden"
+                        : "newsCardList__title")
+                    : "newsCardList__title"
+                }>
 
                 {isLogged
                     ? (isRouteSavedArticles
@@ -76,12 +82,9 @@ export default function NewsCardList({
 
             <button
                 className=
-                {showMoreButton ?
-                    (isRouteSavedArticles
-                        ?"newsCardList__button-hidden"
-                        : "newsCardList__button"
-                    )
-                    : "newsCardList__button" }
+                {isRouteSavedArticles 
+                ?"newsCardList__button-hidden"
+                : "newsCardList__button" }
                 onClick={handleSeeMoreClick}
                 type='button'
             >

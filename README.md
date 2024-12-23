@@ -1,1 +1,1 @@
-Pági
+Página Web con diseño responsivo. Utiliza React, HTML y CSS. La página incluye funcionalidades como pop-ups, envío de información mediante componentes de React y metodología BEM en el nombramiento de clases. Además, incorpora validaciones para prevenir formularios vacíos o con datos incorrectos. Su objetivo es proveer al usuario de las noticias más recientes sobre el tema que desee. Incluye varias rutas, y la opción de guardar y eliminar noticias. 

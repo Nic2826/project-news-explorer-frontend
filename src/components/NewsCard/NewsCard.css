@@ -6,7 +6,6 @@
     background-color: white;
     border-radius: 20px;
     position: relative;
-    overflow: hidden;
 }
 
 .card__image {
@@ -186,7 +185,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
     .card__container {
         width: 288px;
         height: 440px;

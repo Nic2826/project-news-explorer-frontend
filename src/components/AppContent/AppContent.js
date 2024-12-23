@@ -24,6 +24,7 @@ function AppContent() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
+  
 
   const navigate = useNavigate();
   
@@ -121,23 +122,23 @@ const handleRegisterClick = () => {
 
   // Nueva función para hacer la búsqueda
   const handleSearch = async (keyword) => {
-    setIsLoading(true);
-    try {
-      const articles = await api.fetchNews(keyword);
-      const articlesWithIds = articles.map((article, index) => ({
-        ...article,
-        id: `${article.url}-${Date.now()}-${index}`
-      }));
-      setArticles(articlesWithIds);
-      setSearchKeyword(keyword);
-      setSearchError(null);
-    } catch (error) {
-      setSearchError(error.message);
-      setArticles([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  setIsLoading(true);
+  try {
+    const validArticles = await api.fetchNews(keyword);
+    const articlesWithIds = validArticles.map((article, index) => ({
+      ...article,
+      id: `${article.url}-${Date.now()}-${index}`
+    }));
+    setArticles(articlesWithIds);
+    setSearchKeyword(keyword);
+    setSearchError(null);
+  } catch (error) {
+    setSearchError(error.message);
+    setArticles([]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   // Modifica el renderContentAboveAbout
   const renderContentAboveAbout = () => {
@@ -169,8 +170,11 @@ const handleRegisterClick = () => {
   };
 
   function handleGitHubClick(){
-    console.log('click');
     window.open('https://github.com/Nic2826', '_blank');
+      }
+
+      function handleLinkedinClick(){
+        window.open('https://www.linkedin.com/in/nicollealgarin/', '_blank');
       }
 
   return (
@@ -233,7 +237,9 @@ const handleRegisterClick = () => {
             />
           </Routes>
           <Footer 
-          onGitHubClick={handleGitHubClick}/>
+          onGitHubClick={handleGitHubClick}
+          onLinkedinClick={handleLinkedinClick}
+          onInicioClick={handleLoginClick}/>
       </div>
       
     </div>

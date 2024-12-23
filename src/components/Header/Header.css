@@ -1,22 +1,41 @@
 .header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.413);
     color: white;
-    padding-top: 20px;
+    padding: 5px 104px 0;
     z-index: 3;
     margin: 0;
+
+}
+
+.header__black{
+    padding: 5px 104px 0;
 }
 
 .header__logo {
     font-family: "Roboto slab";
     font-size: 20px;
     font-weight: 700;
-    line-height: 24px;
+    line-height: 24px; 
 }
 
+.header__divider {
+    border-bottom: 1px solid white;
+    width: 100vw;
+    box-sizing: border-box;
+    /* margin: 0 -40px; */
+  }
+
 .header__container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 5px 104px 0;
+}
+
+.header__container-text {
     display: flex;
     flex-direction: row;
     gap: 25px;
@@ -74,14 +93,14 @@
     border: 1px solid;
     border-radius: 100px;
     background-color: transparent;
-    width: auto;
     height: 48px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
     color: white;
+    column-gap: 5px;
 }
 
 .header__outicon-hidden {
@@ -102,12 +121,21 @@
 
 .header-black {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    border-bottom: 1px solid black;
     color: black;
-    padding-top: 20px;
+    padding-top: 5px;
     z-index: 3;
+}
+
+.header__container-text-black {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    margin: 0;
+    background-color: transparent;
+    border: none;
 }
 
 .header__logo-black {
@@ -117,6 +145,13 @@
     font-weight: 700;
     line-height: 24px;
 }
+
+.header__divider-black {
+    display: block;
+    border-bottom: 1px solid black;
+    width: 100vw;
+    max-width: 1440px;
+  }
 
 .header__text-black {
     color: black;
@@ -146,6 +181,7 @@
     align-items: center;
     padding: 10px 20px;
     color: black;
+    column-gap: 5px;
 }
 
 
@@ -169,6 +205,11 @@
     background-color: black;
 }
 
+
+/* celular */
+.header__container-text-celular-hidden{
+    display: none;
+}
 
 @media (hover: hover) {
     .header__text:hover {
@@ -202,9 +243,7 @@
     }
 
     .header__text-button:active {
-        /* color: white; */
         border-color: #2A65CC;
-        /* background-color: white; */
     }
 
     
@@ -230,4 +269,210 @@
         background-color: black;
     }
 
+}
+
+@media screen and (max-width: 768px){
+    .header, .header__black{
+        padding: 5px 10px 0;
+    }
+
+    
+}
+
+@media screen and (max-width: 600px) {
+  
+
+    .header__container-text{
+        background-image: url('../../images/headerMenuWhite.png');
+        background-repeat: no-repeat;
+        margin-top: 16px;
+        height: 24px;
+        width: 24px;
+    }
+
+    .header__container-text-black{
+        background-image: url('../../images/HeaderMenuBlack.png');
+        background-repeat: no-repeat;
+        margin-top: 16px;
+        height: 24px;
+        width: 24px;
+    }
+
+    .header__container-text-celular{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header__text, .header__text-black{
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        visibility: hidden;
+    }
+
+    .header__text-button, .header__text-button-black{
+        display: none;
+    }
+/* --------------------------------------------------------------------------------- */
+    .header__text-hidden-celular {
+        visibility: hidden;
+        font-size: 0;
+        font-weight: 0;
+        line-height: 0;
+        width: 0;
+        margin: 0;
+        background-color: transparent;
+        border: none;
+        color: white;
+        
+    }
+    
+    .header__text-hidden-black-celular {
+        visibility: hidden;
+        font-size: 0;
+        font-weight: 0;
+        line-height: 0;
+        width: 0;
+        margin: 0;
+        background-color: transparent;
+        border: none;
+        color: black;
+    }
+    
+    .header__text-celular {
+        font-family: "Roboto";
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        position: relative;
+        width: auto;
+        visibility: visible;
+        background-color: transparent;
+        border: none;
+        color: white;
+        margin: 0;
+    }
+    
+    .header__text-button-celular {
+        font-family: "Roboto";
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        position: relative;
+        border: 1px solid;
+        border-radius: 100px;
+        background-color: transparent;
+        width: auto;
+        height: 48px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        color: white;
+        column-gap: 5px;
+    }
+    
+    .header__outicon-hidden-celular {
+        visibility: hidden;
+        width: 0;
+    }
+    
+    .header__outicon-celular {
+        width: 17px;
+        height: 16px;
+        margin-left: 10px;
+        visibility: visible;
+    }
+    
+    
+    
+    /* -----------------------------Black letter ----------------------*/
+    
+    .header__black-celular {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: black;
+        padding-top: 5px;
+        z-index: 3;
+        background-color:rgba(57, 5, 105, 0.486);
+        margin: 0 -40px;
+        
+    }
+   
+
+    
+    
+    .header__container-text-black-celular {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        align-items: center;
+        margin: 0;
+        background-color: transparent;
+        border: none;
+    }
+    
+    .header__logo-black-celular {
+        color: black;
+        font-family: "Roboto slab";
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+    
+    .header__divider-black-celular {
+        border-bottom: 1px solid black;
+        width: 100vw;
+        box-sizing: border-box;  
+        display: block;
+    box-sizing: border-box;
+      }
+    
+    .header__text-black-celular {
+        color: black;
+        font-family: "Roboto";
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        position: relative;
+        width: auto;
+        visibility: visible;
+    }
+    
+    .header__text-button-black-celular {
+        font-family: "Roboto";
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+        position: relative;
+        border: 1px solid;
+        border-radius: 100px;
+        background-color: transparent;
+        width: auto;
+        height: 48px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        color: black;
+        column-gap: 5px;
+    }
+    
+    
+    .header__text-inicio-active::after {
+        display: none;
+    }
+    
+    .header__text-saved-active::after {
+        display: none;
+    }
+    
+
+ 
 }

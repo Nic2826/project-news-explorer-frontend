@@ -2,9 +2,13 @@ import { useState } from 'react';
 
 export default function SearchForm({ onSearch, isLoading }) {
     const [keyword, setKeyword] = useState('');
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
+        onSearch(keyword);
+    };
+
+    const handleButtonClick = () => {
         onSearch(keyword);
     };
 
@@ -13,7 +17,7 @@ export default function SearchForm({ onSearch, isLoading }) {
     };
 
     return (
-        <div className="search__container">
+        <div className="search">
             <form
                 className="search-form__container"
                 onSubmit={handleSubmit}
@@ -29,46 +33,14 @@ export default function SearchForm({ onSearch, isLoading }) {
                     name="search-form"
                     disabled={isLoading}
                 />
-
-                <button
-                    className="search-form__button"
-                    type="submit"
-                    disabled={isLoading}
-                >
-                    {isLoading ? 'Buscando...' : 'Buscar'}
-                </button>
             </form>
+            <button
+                className="search-form__button"
+                onClick={handleButtonClick}
+                disabled={isLoading}
+            >
+                {isLoading ? 'Buscando...' : 'Buscar'}
+            </button>
         </div>
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

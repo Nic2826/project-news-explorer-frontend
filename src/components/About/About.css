@@ -81,8 +81,22 @@
     }
 }
 
+@media screen and (max-width: 550px){
+    .about__container {
+        margin-top: 32px;
+        margin-bottom: 0;
+        padding: 0 40px 61px;
+    }
+
+    .about__image{
+        width: 172px;
+        height: 172px;
+        margin: 21px 20px 24px 0;
+    }
+}
+
 /* Celular */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
 
     .about__container {
         display: flex;
@@ -90,19 +104,17 @@
         margin-top: 32px;
         margin-bottom: 0;
         padding: 0 40px 61px;
+        align-items: center;
     }
 
     .about__image{
         width: 272px;
         height: 272px;
         margin: 21px auto 24px;
-        
     }
 
     .about__text-container {
-        margin-left: 56px;
-        margin-top: 51px;
-        margin: 0;
+        margin: 0 auto;
         width: 288px;
     }
     

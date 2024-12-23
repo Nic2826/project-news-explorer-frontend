@@ -17,12 +17,7 @@ export default function Main({ onSearch,
   isRegisterOpen,
   onClosePopups,
   onSubmitLogin,
-  onRegisterClick,
-  onSaveArticle,
-  articles,
-  onDeleteArticle,
-  onUpdateArticles,
-  searchKeyword }) {
+  onRegisterClick,}) {
 
     
 

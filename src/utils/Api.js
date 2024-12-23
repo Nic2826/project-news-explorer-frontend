@@ -1,4 +1,3 @@
-// Your API key is: a4bdb6282888411298fe461bde7d9688
 import { formatDate } from './formatDate';
 class Api {
     constructor(options) {
