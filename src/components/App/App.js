@@ -1,15 +1,22 @@
 import { BrowserRouter } from 'react-router-dom';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import AppContent from '../AppContent/AppContent';
+
 
 function App() {
   return (
     <div className="body">
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-      
+
+      <CurrentUserContext.Provider value={currentUser}>
+
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+
+      </CurrentUserContext.Provider>
+
     </div>
-    
+
   );
 }
 

@@ -1,4 +1,4 @@
-import {  Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import {  Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './AppContent.css';
 import Main from '../Main/Main';
@@ -10,6 +10,7 @@ import NotFound from '../NotFound/NotFound';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import api from '../../utils/Api';
 import RouteHandler from '../RouteHandler/RouteHandler';
+import ProtectedRoute from './ProtectedRoute.js';
 
 
 function AppContent() {
@@ -182,7 +183,8 @@ const handleRegisterClick = () => {
       <div className="page__container">
         <RouteHandler onRouteChange={handleRouteChange} />
           <Routes>
-            <Route path = "/" element={<Navigate replace to="/main"/>}></Route>
+
+            <Route path = "/" element={<ProtectedRoute replace to="/main"/>}></Route>
             <Route 
               path="/main"
               element={
