@@ -65,8 +65,84 @@ async fetchNews(keyword, pageSize = 3) {
       throw new Error('No se pudieron cargar las noticias. Intente de nuevo.');
     }
   }
+
+
+
+// Método GET para obtener artículos
+async getArticles() {
+  try {
+    const url = `${this.baseUrl}/articles`; // Ajusta la URL según tu configuración
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        ...this.headers,
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // Asume que guardas el token de autenticación
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    throw new Error('No se pudieron cargar los artículos.');
+  }
 }
 
+// Método POST para crear un artículo
+async createArticle(articleData) {
+  try {
+    const url = `${this.baseUrl}/articles`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        ...this.headers,
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(articleData)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error creating article:', error);
+    throw new Error('No se pudo crear el artículo.');
+  }
+}
+
+// Método POST para inicio de sesión
+async signin(credentials) {
+  try {
+    const url = `${this.baseUrl}/signin`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        ...this.headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    // Guardar el token de autenticación
+    localStorage.setItem('token', data.token);
+    return data;
+  } catch (error) {
+    console.error('Error signing in:', error);
+    throw new Error('No se pudo iniciar sesión.');
+  }
+}
+}
 
 
 const api = new Api({
@@ -77,5 +153,7 @@ const api = new Api({
     },
     groupId: "web_es_11",
 });
+
+
 
 export default api;
