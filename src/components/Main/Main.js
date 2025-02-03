@@ -63,10 +63,11 @@ export default function Main({ onSearch,
         onLoginClick={handleLoginClick}
         />
       }
-
-      {/* {isInfoPopUpOpen && <PopUpInfo />} */}
+     
 
     </div>
+
+    
   );
 }
 
