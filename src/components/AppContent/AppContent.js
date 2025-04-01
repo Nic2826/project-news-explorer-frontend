@@ -26,13 +26,13 @@ function AppContent() {
   const [name, setName] = useState('nic');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
+  // const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState({
-    email: '',
-    password: '',
-    username: '',
-  });
+  // const [currentUser, setCurrentUser] = useState({
+  //   email: '',
+  //   password: '',
+  //   username: '',
+  // });
 
 
   const navigate = useNavigate();
