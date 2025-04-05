@@ -5,8 +5,6 @@ import AppContent from '../AppContent/AppContent';
 import api from '../../utils/Api.js';
 
 
-
-
 function App() {
   const [currentUser, setCurrentUser] = useState({
     email: '',

@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import NewsCardList from '../NewsCardList/NewsCardList';
+// import NewsCardList from '../NewsCardList/NewsCardList';
 // import PopUpInfo from '../PopUpInfo/PopUpInfo';
 
 export default function Main({ onSearch, 
@@ -63,7 +63,6 @@ export default function Main({ onSearch,
         onLoginClick={handleLoginClick}
         />
       }
-     
 
     </div>
 

@@ -26,13 +26,13 @@ function AppContent() {
   const [name, setName] = useState('nic');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
+  // const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState({
-    email: '',
-    password: '',
-    username: '',
-  });
+  // const [currentUser, setCurrentUser] = useState({
+  //   email: '',
+  //   password: '',
+  //   username: '',
+  // });
 
 
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ function AppContent() {
       console.log('Usuario logueado, haciendo logout');
       setIsLogged(false);
       setName('Iniciar sesión');
-      navigate('/main'); // Now we can use navigate here
+      navigate('/project-news-explorer-frontend'); // Now we can use navigate here
     } else {
       console.log('Usuario no logueado, abriendo login');
       setIsLoginOpen(true);
@@ -77,7 +77,7 @@ function AppContent() {
     e.preventDefault();
     setIsLoginOpen(false);
     setIsLogged(true);
-    // navigate('/main');
+    navigate('/project-news-explorer-frontend');
   };
 
   // Handle register click
@@ -151,6 +151,9 @@ function AppContent() {
 
   // Modifica el renderContentAboveAbout
   const renderContentAboveAbout = () => {
+    console.log('isLoading:', isLoading);
+    console.log('searchKeyword:', searchKeyword);
+
 
     if (isLoading) {
       return <Preloader />;
@@ -192,7 +195,7 @@ function AppContent() {
         <RouteHandler onRouteChange={handleRouteChange} />
         <Routes>
           <Route
-            path="/main"
+            path="/project-news-explorer-frontend"
             element={
               <ProtectedRoute component={Main}
                 onSearch={handleSearch}
@@ -239,8 +242,9 @@ function AppContent() {
               />
             }
           />
-          <Route path="/" element={<Navigate replace to="/main" />}></Route>
+          <Route path="/" element={<Navigate replace to="/project-news-explorer-frontend" />}></Route>
         </Routes>
+        {renderContentAboveAbout()}
         <Footer
           onGitHubClick={handleGitHubClick}
           onLinkedinClick={handleLinkedinClick}

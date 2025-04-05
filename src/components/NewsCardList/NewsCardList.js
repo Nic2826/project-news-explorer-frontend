@@ -42,7 +42,7 @@ export default function NewsCardList({
             <div className="no-articles">
                 {isRouteSavedArticles
                     ? <NotFound />
-                    : null
+                    : console.log('No hay artículos para mostrar')
                 }
             </div>
         );
