@@ -7,7 +7,7 @@ export default function About() {
         <div className="about__text-container">
             <p className="about__title">Acerca del autor</p>
             <p className="about__description">
-                ¡Hola Mundo! Mi nombre es Nicolle Algarín, soy Ingeniera Industrial y Desarrolladora Web Junior
+                ¡Hola Mundo! Mi nombre es Nicolle Algarín, soy Desarrolladora Web Junior y Project Manager
                 <br></br>
                 <br></br>
                 Me emociona mucho presentarles mi nueva página web, donde podrán realizar sus busquedas de las más 

@@ -151,17 +151,14 @@ function AppContent() {
 
   // Modifica el renderContentAboveAbout
   const renderContentAboveAbout = () => {
-    console.log('isLoading:', isLoading);
-    console.log('searchKeyword:', searchKeyword);
-
 
     if (isLoading) {
       return <Preloader />;
-
     }
     if (searchKeyword && articles.length === 0) {
       return <NotFound />;
     }
+    
 
     if (articles.length > 0) {
       return (
@@ -181,6 +178,12 @@ function AppContent() {
 
   };
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Opens the GitHub profile page of the user in a new browser tab.
+ */
+
+/*******  54f26861-ac4b-4f44-ab77-293b4fd2fecf  *******/
   function handleGitHubClick() {
     window.open('https://github.com/Nic2826', '_blank');
   }
@@ -218,14 +221,12 @@ function AppContent() {
                 onUpdateArticles={handleUpdateArticles}
                 searchKeyword={searchKeyword}
               >
+             
 
-                <div className="content-wrapper" style={{ position: 'relative' }}>
-                  {renderContentAboveAbout()}
-                  {articles.length === 0 && <About />}
-                </div>
               </ProtectedRoute>
             }
           />
+          
           <Route
             path="/saved-news"
             element={
@@ -244,7 +245,10 @@ function AppContent() {
           />
           <Route path="/" element={<Navigate replace to="/project-news-explorer-frontend" />}></Route>
         </Routes>
-        {renderContentAboveAbout()}
+      <div className="content-wrapper" style={{ position: 'relative' }}>
+{renderContentAboveAbout()}
+{articles.length === 0 && !isLoading && <About />}
+</div>
         <Footer
           onGitHubClick={handleGitHubClick}
           onLinkedinClick={handleLinkedinClick}
@@ -256,3 +260,4 @@ function AppContent() {
 }
 
 export default AppContent;
+
