@@ -2,7 +2,7 @@
   "name": "news-explorer-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Nic2826.github.io/news-explorer-frontend",
+  "homepage": "https://Nic2826.github.com/news-explorer-frontend",
   "dependencies": {
     "cra-template": "1.2.0",
     "react": "^19.0.0",
