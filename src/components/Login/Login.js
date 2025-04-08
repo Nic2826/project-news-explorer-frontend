@@ -124,7 +124,7 @@ const handleChange = (e) => {
         }
       } catch (error) {
         console.error('Error validando el token:', error.message);
-        navigate('/news-explorer-frontend');
+        navigate('/project-news-explorer-frontend');
       }
     }
     
