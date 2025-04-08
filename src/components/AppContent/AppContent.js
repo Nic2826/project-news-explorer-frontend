@@ -1,4 +1,4 @@
-import {  Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './AppContent.css';
 import Main from '../Main/Main';
@@ -10,6 +10,9 @@ import NotFound from '../NotFound/NotFound';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import api from '../../utils/Api';
 import RouteHandler from '../RouteHandler/RouteHandler';
+import ProtectedRoute from '../ProtectedRoute.js';
+
+
 
 
 function AppContent() {
@@ -23,11 +26,17 @@ function AppContent() {
   const [name, setName] = useState('nic');
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
-  
+  // const [isInfoPopUpOpen, setIsInfoPopUpOpen] = useState(false);
+
+  // const [currentUser, setCurrentUser] = useState({
+  //   email: '',
+  //   password: '',
+  //   username: '',
+  // });
+
 
   const navigate = useNavigate();
-  
+
 
   // Add useEffect to load saved articles from localStorage on component mount
   useEffect(() => {
@@ -37,19 +46,19 @@ function AppContent() {
     }
   }, []);
 
- // Nueva función para manejar la ruta
- const handleRouteChange = (pathname) => {
-  setIsRouteSavedArticles(pathname === '/saved-news');
-};
+  // Nueva función para manejar la ruta
+  const handleRouteChange = (pathname) => {
+    setIsRouteSavedArticles(pathname === '/saved-news');
+  };
 
-// Centralizar la lógica de login aquí
-const handleLoginClick = () => {
+  // Centralizar la lógica de login aquí
+  const handleLoginClick = () => {
     console.log('handleLoginClick ejecutado en App');
     if (isLogged) {
       console.log('Usuario logueado, haciendo logout');
       setIsLogged(false);
       setName('Iniciar sesión');
-      navigate('/main'); // Now we can use navigate here
+      navigate('/news-explorer-frontend'); // Now we can use navigate here
     } else {
       console.log('Usuario no logueado, abriendo login');
       setIsLoginOpen(true);
@@ -57,29 +66,29 @@ const handleLoginClick = () => {
     }
   };
 
-// Close all popups
-const handleCloseAllPopups = () => {
-  setIsLoginOpen(false);
-  setIsRegisterOpen(false);
-};
+  // Close all popups
+  const handleCloseAllPopups = () => {
+    setIsLoginOpen(false);
+    setIsRegisterOpen(false);
+  };
 
-// Handle successful login
-const handleSubmitLogin = (e) => {
-  e.preventDefault();
-  setIsLoginOpen(false);
-  setIsLogged(true);
-  // navigate('/main');
-};
+  // Handle successful login
+  const handleSubmitLogin = (e) => {
+    e.preventDefault();
+    setIsLoginOpen(false);
+    setIsLogged(true);
+    navigate('/news-explorer-frontend');
+  };
 
-// Handle register click
-const handleRegisterClick = () => {
-  setIsRegisterOpen(true);
-  setIsLoginOpen(false);
-};
+  // Handle register click
+  const handleRegisterClick = () => {
+    setIsRegisterOpen(true);
+    setIsLoginOpen(false);
+  };
 
   // Nueva función para guardar artículos
   const handleSaveArticle = (articleToSave) => {
-    console.log('Article received in handleSaveArticle:', articleToSave); 
+    console.log('Article received in handleSaveArticle:', articleToSave);
     const isAlreadySaved = savedArticles.some(
       (savedArticle) => savedArticle.url === articleToSave.url
     );
@@ -91,12 +100,12 @@ const handleRegisterClick = () => {
         searchKeyword: searchKeyword, // Añadimos el keyword de búsqueda original
         id: `${articleToSave.url}-${Date.now()}`
       };
-      console.log('Final article being saved:', articleWithKeyword); 
+      console.log('Final article being saved:', articleWithKeyword);
       const updatedSavedArticles = [...savedArticles, articleWithKeyword];
       setSavedArticles(updatedSavedArticles);
       localStorage.setItem('savedArticles', JSON.stringify(updatedSavedArticles));
     }
-};
+  };
 
   // Nueva función para eliminar artículos guardados
   const handleDeleteArticle = (articleToDelete) => {
@@ -122,34 +131,34 @@ const handleRegisterClick = () => {
 
   // Nueva función para hacer la búsqueda
   const handleSearch = async (keyword) => {
-  setIsLoading(true);
-  try {
-    const validArticles = await api.fetchNews(keyword);
-    const articlesWithIds = validArticles.map((article, index) => ({
-      ...article,
-      id: `${article.url}-${Date.now()}-${index}`
-    }));
-    setArticles(articlesWithIds);
-    setSearchKeyword(keyword);
-    setSearchError(null);
-  } catch (error) {
-    setSearchError(error.message);
-    setArticles([]);
-  } finally {
-    setIsLoading(false);
-  }
-};
+    setIsLoading(true);
+    try {
+      const validArticles = await api.fetchNews(keyword);
+      const articlesWithIds = validArticles.map((article, index) => ({
+        ...article,
+        id: `${article.url}-${Date.now()}-${index}`
+      }));
+      setArticles(articlesWithIds);
+      setSearchKeyword(keyword);
+      setSearchError(null);
+    } catch (error) {
+      setSearchError(error.message);
+      setArticles([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Modifica el renderContentAboveAbout
   const renderContentAboveAbout = () => {
 
     if (isLoading) {
       return <Preloader />;
-
     }
     if (searchKeyword && articles.length === 0) {
       return <NotFound />;
     }
+    
 
     if (articles.length > 0) {
       return (
@@ -169,81 +178,86 @@ const handleRegisterClick = () => {
 
   };
 
-  function handleGitHubClick(){
-    window.open('https://github.com/Nic2826', '_blank');
-      }
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Opens the GitHub profile page of the user in a new browser tab.
+ */
 
-      function handleLinkedinClick(){
-        window.open('https://www.linkedin.com/in/nicollealgarin/', '_blank');
-      }
+/*******  54f26861-ac4b-4f44-ab77-293b4fd2fecf  *******/
+  function handleGitHubClick() {
+    window.open('https://github.com/Nic2826', '_blank');
+  }
+
+  function handleLinkedinClick() {
+    window.open('https://www.linkedin.com/in/nicollealgarin/', '_blank');
+  }
 
   return (
     <div className="body">
       <div className="page__container">
         <RouteHandler onRouteChange={handleRouteChange} />
-          <Routes>
-            <Route path = "/" element={<Navigate replace to="/main"/>}></Route>
-            <Route 
-              path="/main"
-              element={
-                <>
-                  <Main
-                    onSearch={handleSearch}                    
-                    isLoading={isLoading}
-                    searchError={searchError}
-                    isLogged={isLogged}
-                    setIsLogged={setIsLogged}
-                    isRouteSavedArticles={isRouteSavedArticles}
-                    handleLoginClick={handleLoginClick}
-                    name={name}
-                    setName={setName}
-                    isLoginOpen={isLoginOpen}
-                    isRegisterOpen={isRegisterOpen}
-                    onClosePopups={handleCloseAllPopups}
-                    onSubmitLogin={handleSubmitLogin}
-                    onRegisterClick={handleRegisterClick}
-                    onSaveArticle={handleSaveArticle}
-                    articles={articles}
-                    onDeleteArticle={handleDeleteArticle}
-                    onUpdateArticles={handleUpdateArticles}
-                    searchKeyword={searchKeyword}
-                  />
-                  <div className="content-wrapper" style={{ position: 'relative' }}>
-                    {renderContentAboveAbout()}
-                    <div style={{
-                      display: articles.length > 0 ? 'none' : 'block'
-                    }}>
-                      <About />
-                    </div>
-                  </div>
-                </>
-              }
-            />
-            <Route
-              path="/saved-news"
-              element={
+        <Routes>
+          <Route
+            path="/news-explorer-frontend"
+            element={
+              <ProtectedRoute component={Main}
+                onSearch={handleSearch}
+                isLoading={isLoading}
+                searchError={searchError}
+                isLogged={isLogged}
+                setIsLogged={setIsLogged}
+                isRouteSavedArticles={isRouteSavedArticles}
+                handleLoginClick={handleLoginClick}
+                name={name}
+                setName={setName}
+                isLoginOpen={isLoginOpen}
+                isRegisterOpen={isRegisterOpen}
+                onClosePopups={handleCloseAllPopups}
+                onSubmitLogin={handleSubmitLogin}
+                onRegisterClick={handleRegisterClick}
+                onSaveArticle={handleSaveArticle}
+                articles={articles}
+                onDeleteArticle={handleDeleteArticle}
+                onUpdateArticles={handleUpdateArticles}
+                searchKeyword={searchKeyword}
+              >
+             
 
-                <SavedNews
-                  articles={savedArticles}
-                  isLogged={true}
-                  onSaveArticle={handleSaveArticle}
-                  onDeleteArticle={handleDeleteArticle}
-                  keyword={searchKeyword}
-                  isRouteSavedArticles={isRouteSavedArticles}
-                  handleLoginClick={handleLoginClick}
-                  username={name}
-                />
-              }
-            />
-          </Routes>
-          <Footer 
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/saved-news"
+            element={
+
+              <SavedNews
+                articles={savedArticles}
+                isLogged={true}
+                onSaveArticle={handleSaveArticle}
+                onDeleteArticle={handleDeleteArticle}
+                keyword={searchKeyword}
+                isRouteSavedArticles={isRouteSavedArticles}
+                handleLoginClick={handleLoginClick}
+                username={name}
+              />
+            }
+          />
+          <Route path="/" element={<Navigate replace to="/news-explorer-frontend" />}></Route>
+        </Routes>
+      <div className="content-wrapper" style={{ position: 'relative' }}>
+{renderContentAboveAbout()}
+{articles.length === 0 && !isLoading && <About />}
+</div>
+        <Footer
           onGitHubClick={handleGitHubClick}
           onLinkedinClick={handleLinkedinClick}
-          onInicioClick={handleLoginClick}/>
+          onInicioClick={handleLoginClick} />
       </div>
-      
+
     </div>
   );
 }
 
 export default AppContent;
+
