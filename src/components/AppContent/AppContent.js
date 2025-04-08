@@ -58,7 +58,7 @@ function AppContent() {
       console.log('Usuario logueado, haciendo logout');
       setIsLogged(false);
       setName('Iniciar sesión');
-      navigate('/project-news-explorer-frontend'); // Now we can use navigate here
+      navigate('/news-explorer-frontend'); // Now we can use navigate here
     } else {
       console.log('Usuario no logueado, abriendo login');
       setIsLoginOpen(true);
@@ -77,7 +77,7 @@ function AppContent() {
     e.preventDefault();
     setIsLoginOpen(false);
     setIsLogged(true);
-    navigate('/project-news-explorer-frontend');
+    navigate('/news-explorer-frontend');
   };
 
   // Handle register click
@@ -198,7 +198,7 @@ function AppContent() {
         <RouteHandler onRouteChange={handleRouteChange} />
         <Routes>
           <Route
-            path="/project-news-explorer-frontend"
+            path="/news-explorer-frontend"
             element={
               <ProtectedRoute component={Main}
                 onSearch={handleSearch}
@@ -243,7 +243,7 @@ function AppContent() {
               />
             }
           />
-          <Route path="/" element={<Navigate replace to="/project-news-explorer-frontend" />}></Route>
+          <Route path="/" element={<Navigate replace to="/news-explorer-frontend" />}></Route>
         </Routes>
       <div className="content-wrapper" style={{ position: 'relative' }}>
 {renderContentAboveAbout()}

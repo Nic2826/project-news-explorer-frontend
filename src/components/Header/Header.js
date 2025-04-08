@@ -21,7 +21,7 @@ function handleMenuHeaderClick(){
   }
 
   function handleInicioClick() {
-    navigate('/project-news-explorer-frontend');
+    navigate('/news-explorer-frontend');
     console.log(isLogged);
   }
 

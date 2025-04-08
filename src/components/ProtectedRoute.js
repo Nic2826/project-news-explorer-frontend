@@ -8,13 +8,13 @@ export default function ProtectedRoute({ component: Component, ...rest }) {
     function checkToken(){
       const token = localStorage.getItem('jwt');
     if (!token) {
-      navigate('/project-news-explorer-frontend');
+      navigate('/news-explorer-frontend');
     }
     }
     checkToken();
       },[navigate])
 
       const token = localStorage.getItem('jwt');
-  return token ? <Component {...rest} /> : <Navigate to="/project-news-explorer-frontend" />;
+  return token ? <Component {...rest} /> : <Navigate to="/news-explorer-frontend" />;
   
 }
